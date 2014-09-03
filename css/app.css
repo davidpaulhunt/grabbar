@@ -1,0 +1,134 @@
+.centered {
+  text-align: center;
+}
+
+.all-lists {
+  margin-top: 20px;
+  margin-left: -120px;
+  border: 2px solid #333;
+  width: 150px;
+  height: 45px;
+  padding: 11px 20px;
+  cursor: pointer;
+}
+
+.all-lists.ng-hide-add.ng-hide-add-active {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.all-lists.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.all-lists.ng-hide {
+  line-height:0;
+  opacity:0;
+  padding:0 10px;
+}
+
+.lists-span.ng-hide-add.ng-hide-add-active  {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.lists-span.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+}
+
+.lists-span.ng-hide {
+  line-height:0;
+  opacity:0;
+  padding:0 10px;
+}
+
+.list-item {
+  list-style: none;
+  margin-top: 20px;
+  margin-left: -33px;
+  border: 2px solid #333;
+  width: 150px;
+  height: 35px;
+  padding: 7px 20px;
+  cursor: pointer;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: center;
+}
+
+.list-item:hover {
+  width: 250px;
+}
+
+.list-items-list {
+  margin-left: -120px;
+  list-style: none;
+  width: 150px;
+  margin-top: 20px;
+}
+
+.all-lists-column {
+  min-height: 100vh;
+}
+
+.new-list-column {
+  min-height: 100vh;
+}
+
+.new-list-box {
+  margin-top: 40vh;
+}
+
+.new-list-button {
+  font-size: 3em;
+  cursor: pointer;
+}
+
+.new-list-title {
+  height: 55px;
+  font-size: 3em;
+  border: none;
+  background-color: transparent;
+  /*margin-left: 200px;*/
+  margin-top: -2px;
+  border-bottom: 1px solid #333;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.new-list-title:focus {
+  border: none;
+  border-width: 0;
+  -webkit-appearance: none;
+  outline: 0;
+  text-transform: uppercase;
+  border-bottom: 1px solid #333;
+  text-align: center;
+}
+
+.new-list-submit-button {
+  border-radius: 0;
+  background-color: #FFF;
+  color: #000;
+  border: 2px solid #333;
+  margin-top: 10px;
+  width: 100px;
+}
+
+.input-group-addon {
+  background-color: transparent;
+  border: none;
+}
+
+.return-to-main {
+  width: 35px;
+  height: 35px;
+  padding: 8px;
+  border: 2px solid #333;
+  border-radius: 50px;
+  margin-top: 25px;
+  margin-left: -53px;
+  cursor: pointer;
+}
