@@ -44,7 +44,7 @@
                       <h1 ng-click="editing='title'" ng-hide="editing=='title'" style="display:inline-block">{{ currentlist.title | uppercase }}</h1><span ng-hide="editing=='title'" ng-click="removeList(currentlist); main.show = !main.show" style="margin-left:25px;" class="glyphicon glyphicon-remove list-glyph"></span>
                       <span ng-show="editing=='title'">
                         <form name="currentlistForm" class="form-inline" ng-submit="currentlistForm.$valid" novalidate>
-                          <input type="text" ng-model="currentlist.title" class="form-control" required>
+                          <input type="text" ng-model="currentlist.title" class="form-control current-list-title" required>
                           <input type="submit" value="OK" ng-disabled="!currentlistForm.$valid" class="btn btn-xs current-list-submit-button" ng-click="editing=''">
                         </form>
                       </span>

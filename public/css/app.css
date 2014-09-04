@@ -11,7 +11,9 @@ body {
 .all-lists {
   margin-top: 20px;
   margin-left: -120px;
-  border: 2px solid #333;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  border-radius: 50px;
   width: 150px;
   height: 45px;
   padding: 11px 20px;
@@ -134,6 +136,14 @@ body {
   border: 2px solid #333;
   margin-top: 10px;
   width: 100px;
+  height: 35px;
+}
+
+.current-list-title {
+  height: 50px;
+  margin-top: 25px;
+  margin-bottom: 16px;
+  font-size: 1.5em;
 }
 
 .input-group-addon {
