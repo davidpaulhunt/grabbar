@@ -12,36 +12,58 @@
     $scope.list = {};
     $scope.list.items = [];
     $scope.addList = function() {
+      $scope.currentlist = $scope.list;
+      $scope.viewList($scope.list);
+      console.log($scope.list);
       $scope.creatingList = 'false';
       $scope.list.createdAt = Date.now();
       $scope.$storage.lists.push($scope.list);
-      return $scope.list = {};
+      $scope.list = {};
+      return $scope.list.items = [];
     };
     $scope.removeAll = function() {
       return $scope.$storage.reset();
     };
     $scope.removeList = function(list) {
       var listPosition, lists;
+      $scope.singleview = 'false';
       lists = $scope.$storage.lists;
       listPosition = lists.indexOf(list);
-      lists.splice(listPosition, 1);
-      return $scope.$storage.lists;
+      return lists.splice(listPosition, 1);
     };
     $scope.logList = function(list) {
       return console.log(list);
     };
-    return $scope.viewList = function(list) {};
+    $scope.viewList = function(list) {
+      $scope.currentlist = list;
+      return $scope.singleview = 'true';
+    };
+    return $scope.backToAll = function() {
+      delete $scope.currentlist;
+      return console.log("List deleted.");
+    };
   });
 
   app.controller("ItemsController", function($scope) {
     $scope.item = {};
-    return $scope.addItem = function(list) {
-      var newItem;
-      newItem = $scope.item;
-      newItem.createdAt = Date.now();
-      newItem.toPurchase = true;
-      list.items.push(newItem);
+    $scope.addItem = function(list) {
+      $scope.item.createdAt = Date.now();
+      $scope.item.toPurchase = true;
+      list.items.push($scope.item);
       return $scope.item = {};
+    };
+    $scope.purchaseItem = function(item) {
+      alert("Made it to purchase.");
+      item.toPurchase = false;
+      return console.log(item);
+    };
+    return $scope.removeItem = function(list, item) {
+      var itemPosition;
+      if (confirm("Remove item forever?")) {
+        itemPosition = list.items.indexOf(item);
+        list.items.splice(itemPosition, 1);
+        return list;
+      }
     };
   });
 

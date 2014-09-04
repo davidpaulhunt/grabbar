@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
   </head>
@@ -18,7 +19,7 @@
               </div>
               <div class="lists-box">
                 <ul ng-repeat="list in $storage.lists track by $index" class="list-items-list">
-                  <li class="list-item" ng-click="main.singlelist = 'true'">{{ list.title | uppercase }}<button ng-click="removeList(list)" class="btn btn-xs btn-danger">X</button></li>
+                  <li class="list-item" ng-click="viewList(list); main.show = !main.show">{{ list.title | uppercase }}</li>
                 </ul>
               </div>
             </span>
@@ -26,19 +27,51 @@
           
           <div class="col-lg-11 new-list-column">
             <div class="centered">
-              <div id="new-list-box" class="new-list-box" ng-hide="main.singlelist === 'true'">
-                <!-- <div id="new-list-button" class="new-list-button" ng-hide="creatingList == 'true'" ng-click="creatingList = 'true'" ng-show="creatingList != 'true'">
-                  NEW &nbsp; <span class="glyphicon glyphicon-plus"></span> &nbsp; LIST
-                </div> -->
-                <!-- <span ng-show="creatingList == 'true'"> -->
-                  <form ng-controller="ListsController" ng-submit="newList.$valid && addList()" name="newList" class="form-inline" novalidate>
-                    <div class="input-group">
-                      <input type="text" placeholder="MAKE A NEW LIST" class="new-list-title" autofocus required ng-model="list.title"/>
+              <button ng-show="main.show" ng-click="main.show = !main.show" class="add-list">NEW LIST&nbsp;&nbsp;<span class="glyphicon glyphicon-plus item-glyph"></span></button>
+              <div id="new-list-box" class="new-list-box">
+                
+                <form ng-submit="newList.$valid && addList(); main.show = !main.show; viewingAllLists = 'true';" name="newList" class="form-inline"  ng-hide="main.show" show="main.show" novalidate>
+                  <div class="input-group">
+                    <input type="text" placeholder="MAKE A NEW LIST" class="new-list-title" autofocus required ng-model="list.title"/>
+                  </div>
+                  <br>
+                  <button type="submit" value="CREATE" class="btn new-list-submit-button" ng-disabled="!newList.$valid" ng-click="creatingList = 'no'"/>CREATE&nbsp;<span ng-show="newList.$valid" class="glyphicon glyphicon-ok"></span></button>
+                </form>
+
+                <span ng-show="main.show">
+                  <div ng-controller="ListsController" class="single-list-holder">
+                    <div>
+                      <h1 ng-click="editing='title'" ng-hide="editing=='title'" style="display:inline-block">{{ currentlist.title | uppercase }}</h1><span ng-hide="editing=='title'" ng-click="removeList(currentlist); main.show = !main.show" style="margin-left:25px;" class="glyphicon glyphicon-remove list-glyph"></span>
+                      <span ng-show="editing=='title'">
+                        <form name="currentlistForm" class="form-inline" ng-submit="currentlistForm.$valid" novalidate>
+                          <input type="text" ng-model="currentlist.title" class="form-control" required>
+                          <input type="submit" value="OK" ng-disabled="!currentlistForm.$valid" class="btn btn-xs current-list-submit-button" ng-click="editing=''">
+                        </form>
+                      </span>
                     </div>
-                    <br>
-                    <button type="submit" value="CREATE" class="btn new-list-submit-button" ng-disabled="!newList.$valid" ng-click="creatingList = 'no'"/>CREATE&nbsp;<span ng-show="newList.$valid" class="glyphicon glyphicon-ok"></span></button>
-                  </form>
-                <!-- </span> -->
+                    <form ng-controller="ItemsController" ng-submit="newItem.$valid && addItem(currentlist)" name="newItem" class="form-inline" novalidate>
+                      <div class="input-group">
+                        <input type="text" placeholder="ADD A NEW ITEM" class="new-item-name" autofocus required ng-model="item.name"/>
+                      </div>
+                      <br>
+                      <button type="submit" value="ADD" class="btn new-item-submit-button" ng-disabled="!newItem.$valid" ng-click="addingItem = 'no'"/>ADD&nbsp;<span ng-show="newItem.$valid" class="glyphicon glyphicon-ok"></span></button>
+                    </form>
+                    <div class="items-box">
+                      <ul ng-repeat="item in currentlist.items track by $index" class="items-list">
+                        <li class="item-list-item" ng-hide="editingitem=='name'" ng-disabled="item.toPurchase==false">
+                        <div class="item-list" ng-model="item" ng-click="editingitem='name'" ng-class="(!item.toPurchase==true) ? 'purchased' : ''" ng-disabled="item.toPurchase==false">{{ item.name | uppercase }}</div><div class="glyphicon glyphicon-ok item-glyph" ng-model="item.toPurchase" ng-click="item.toPurchase= !item.toPurchase" ng-class="(item.toPurchase==false) ? 'green' : ''"></div>&nbsp;<div class="glyphicon glyphicon-remove item-glyph" ng-controller="ItemsController" ng-click="removeItem(currentlist, item)"></div>
+                        </li>
+                        <span ng-show="editingitem=='name'">
+                          <form name="editItemForm" class="form-inline" ng-submit="editItemForm.$valid" novalidate>
+                            <input type="text" ng-model="item.name" class="form-control edit-item" required>
+                            <input type="submit" value="OK" ng-disabled="!editItemForm.$valid" class="btn btn-xs edit-item-submit-button" ng-click="editingitem=''">
+                          </form>
+                        </span>
+                      </ul>
+                    </div>
+                  </div>
+                </span>
+
               </div>
             </div>
           </div>
